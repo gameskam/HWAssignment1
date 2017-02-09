@@ -1,0 +1,54 @@
+﻿<html lang="en" class="no-js">
+	<head>
+	    <meta charset="utf-8"> 
+	    <meta http-equiv="X-UA-Compatible" content="chrome=1">	    
+	    <meta name="robots" content="noindex, follow">
+	    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+	   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	   	<script type="text/javascript">
+	   		$(document).ready(function(){
+	   			$('#parse').click(function(){
+	   				$username = $('#username').val();
+	   				
+	   				$.getJSON('https://jsonplaceholder.typicode.com/users', function(data) {
+		    			//data is the JSON string		    		
+			    		for (var i = data.length - 1; i >= 0; i--) {		    			
+			    			
+			    			if(data[i]['username']==$username){
+			    				console.log(data[i]);
+			    				$('#name').text(data[i]['name']);
+			    				$('#email').text(data[i]['email']);
+			    				$('#address').text(data[i]['address']['street']+' '+data[i]['address']['suite']+' '+data[i]['address']['city']+' '+data[i]['address']['zipcode']);
+			    				$('#tel').text(data[i]['phone']);
+			    				$('#website').text(data[i]['website']);
+			    				$('#office').text(data[i]['company']['name']);
+			    			}
+			    	
+			    		}
+					});
+
+	   			}); 
+	   		});
+	   	</script>
+	   	<style>
+	   		.output{
+	   			padding: 20px;
+			    margin: 20px 0;
+			    border: 1px solid #000;
+			    width: 500px;
+	   		}
+	   	</style>
+  	</head>
+  	<body class="full-screen-preview">
+		<label>Username : <input type="text" name="username" id="username" value=""></label>
+		<input type="submit" name="parse" id="parse" value="Parse">
+		<div class="output">
+			<p>ชื่อ : <span id="name"></span></p>
+			<p>อีเมลล์ : <a href="" id="email"></a></p>
+			<p>ที่อยู่ : <span id="address"></span></p>
+			<p>เบอร์โทร : <span id="tel"></span></p>
+			<p>เว็บไซต์ : <span id="website"></span></p>
+			<p>บริษัทที่ทำงาน : <span id="office"></span></p>
+		</div>
+  	</body>
+</html>
